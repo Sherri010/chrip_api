@@ -24,6 +24,33 @@ class TweetsController < ApplicationController
      end
   end
 
+ def edit
+   tweet = Tweet.find(params[:id])
+   if tweet
+     render :json => tweet, status:200
+   else
+     render :json => {error:"not found"},status:404
+   end
+ end
+
+ def update
+   tweet= Tweet.find(params[:id]).update_attributes(tweet_params)
+
+   if tweet
+     render :json => tweet , status: 200
+   else
+     render :json =>{error:"not updated"},status: 200
+   end
+ end
+
+ def destroy
+     t=Tweet.find(params[:id]).destroy
+    if t
+      render :json => {success:"removed!"}, status: 200
+    else
+      render :json => {error:"error-not removed"}, status:200
+    end
+ end
 
   private
 
