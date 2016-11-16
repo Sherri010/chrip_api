@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-
+  before_action :authenticate, except: [:login,:index]
   def index
     render :json => Tweet.all , status: 200
   end
